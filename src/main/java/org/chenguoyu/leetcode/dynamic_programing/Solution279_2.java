@@ -1,24 +1,17 @@
 package org.chenguoyu.leetcode.dynamic_programing;
 
-import java.util.List;
-
 /**
  * 动态规划的解法
  */
-public class Solution343_2 {
-    public int integerBreak(int n) {
+public class Solution279_2 {
+    public int numSquares(int n) {
         int[] memory = new int[n + 1];
-        memory[1] = 1;
-        for (int i = 2; i <= n; i++) {
-            for (int j = 1; j < i; j++) {
-                memory[i] = max3(memory[i], j * (i - j), memory[i - j] * j);
+        for (int i = 1; i <= n; i++) {
+            memory[i] = i;
+            for (int j = 1; j * j <= i; j++) {
+                memory[i] = Math.min(memory[i], memory[i - j * j] + 1);
             }
         }
         return memory[n];
-    }
-
-
-    private int max3(int x, int y, int z) {
-        return Math.max(x, Math.max(y, z));
     }
 }

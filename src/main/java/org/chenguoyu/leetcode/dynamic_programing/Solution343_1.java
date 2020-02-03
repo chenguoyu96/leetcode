@@ -1,42 +1,32 @@
 package org.chenguoyu.leetcode.dynamic_programing;
 
-import java.util.List;
-
 /**
  * 记忆化搜索的解法
  */
-public class Solution64_1 {
-    Integer[][] memory;
-    int rowSize, colSize;
+public class Solution343_1 {
+    Integer[] memory;
 
-    public int minPathSum(int[][] grid) {
-        rowSize = grid.length;
-        colSize = grid[0].length;
-        memory = new Integer[rowSize + 1][colSize + 1];
-        return minPathSum(grid, 0, 0);
+    public int integerBreak(int n) {
+        memory = new Integer[n + 1];
+        return breakInteger(n);
     }
 
-    private int minPathSum(int[][] grid, int row, int col) {
-        if (row == (rowSize - 1) && col == (colSize - 1)) {
-            return grid[row][col];
+    private int breakInteger(int n) {
+        if (n == 1) {
+            return 1;
         }
-        if (memory[row][col] == null) {
-            int down = -1;
-            if (row < (rowSize - 1)) {
-                down = minPathSum(grid, row + 1, col);
+        if (memory[n] == null) {
+            int result = 0;
+            for (int i = 1; i <= n; i++) {
+                result = max3(result, (n - i) * i, breakInteger(n - i) * i);
             }
-            int right = -1;
-            if (col < (colSize - 1)) {
-                right = minPathSum(grid, row, col + 1);
-            }
-            if (down == -1) {
-                memory[row][col] = grid[row][col] + right;
-            } else if (right == -1) {
-                memory[row][col] = grid[row][col] + down;
-            }else {
-                memory[row][col] = grid[row][col] + Math.min(right, down);
-            }
+            memory[n] = result;
+            return result;
         }
-        return memory[row][col];
+        return memory[n];
+    }
+
+    private int max3(int x, int y, int z) {
+        return Math.max(x, Math.max(y, z));
     }
 }

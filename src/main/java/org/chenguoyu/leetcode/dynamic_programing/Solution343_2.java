@@ -5,14 +5,20 @@ import java.util.List;
 /**
  * 动态规划的解法
  */
-public class Solution120_2 {
-    public int minimumTotal(List<List<Integer>> triangle) {
-        int[] memory = new int[triangle.size() + 1];
-        for (int level = triangle.size() - 1; level >= 0; level--) {
-            for (int j = 0; j <= level; j++) {
-                memory[j] = Math.min(memory[j], memory[j + 1])+triangle.get(level).get(j);
+public class Solution343_2 {
+    public int integerBreak(int n) {
+        int[] memory = new int[n + 1];
+        memory[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j < i; j++) {
+                memory[i] = max3(memory[i], j * (i - j), memory[i - j] * j);
             }
         }
-        return memory[0];
+        return memory[n];
+    }
+
+
+    private int max3(int x, int y, int z) {
+        return Math.max(x, Math.max(y, z));
     }
 }

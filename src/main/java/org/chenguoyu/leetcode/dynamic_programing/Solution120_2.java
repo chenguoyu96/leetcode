@@ -1,16 +1,18 @@
 package org.chenguoyu.leetcode.dynamic_programing;
 
+import java.util.List;
+
 /**
  * 动态规划的解法
  */
-public class Solution70_2 {
-    public int climbStairs(int n) {
-        int[] memory = new int[n + 1];
-        memory[0] = 1;
-        memory[1] = 1;
-        for (int i = 2; i <= n; i++) {
-            memory[i] = memory[i - 1] + memory[i - 2];
+public class Solution120_2 {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int[] memory = new int[triangle.size() + 1];
+        for (int level = triangle.size() - 1; level >= 0; level--) {
+            for (int j = 0; j <= level; j++) {
+                memory[j] = Math.min(memory[j], memory[j + 1])+triangle.get(level).get(j);
+            }
         }
-        return memory[n];
+        return memory[0];
     }
 }

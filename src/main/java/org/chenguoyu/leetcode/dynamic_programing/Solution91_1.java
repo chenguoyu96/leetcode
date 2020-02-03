@@ -3,7 +3,7 @@ package org.chenguoyu.leetcode.dynamic_programing;
 /**
  * 动态规划的解法
  */
-public class Solution90_1 {
+public class Solution91_1 {
     Integer[] memory;
 
     public int numDecodings(String s) {

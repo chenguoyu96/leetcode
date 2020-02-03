@@ -5,23 +5,38 @@ import java.util.List;
 /**
  * 记忆化搜索的解法
  */
-public class Solution120_1 {
-    private Integer[][] memory;
+public class Solution64_1 {
+    Integer[][] memory;
+    int rowSize, colSize;
 
-    public int minimumTotal(List<List<Integer>> triangle) {
-        memory = new Integer[triangle.size() + 1][triangle.size() + 1];
-        return minTotal(triangle, 0, 0);
+    public int minPathSum(int[][] grid) {
+        rowSize = grid.length;
+        colSize = grid[0].length;
+        memory = new Integer[rowSize + 1][colSize + 1];
+        return minPathSum(grid, 0, 0);
     }
 
-    public int minTotal(List<List<Integer>> triangle, int level, int n) {
-        if (level == triangle.size() - 1) {
-            return triangle.get(level).get(n);
+    private int minPathSum(int[][] grid, int row, int col) {
+        if (row == (rowSize - 1) && col == (colSize - 1)) {
+            return grid[row][col];
         }
-        if (memory[level][n] == null) {
-            int left = minTotal(triangle, level + 1, n);
-            int right = minTotal(triangle, level + 1, n + 1);
-            memory[level][n] = triangle.get(level).get(n) + Math.min(left, right);
+        if (memory[row][col] == null) {
+            int down = -1;
+            if (row < (rowSize - 1)) {
+                down = minPathSum(grid, row + 1, col);
+            }
+            int right = -1;
+            if (col < (colSize - 1)) {
+                right = minPathSum(grid, row, col + 1);
+            }
+            if (down == -1) {
+                memory[row][col] = grid[row][col] + right;
+            } else if (right == -1) {
+                memory[row][col] = grid[row][col] + down;
+            }else {
+                memory[row][col] = grid[row][col] + Math.min(right, down);
+            }
         }
-        return memory[level][n];
+        return memory[row][col];
     }
 }

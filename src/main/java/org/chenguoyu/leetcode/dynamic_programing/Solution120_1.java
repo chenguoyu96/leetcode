@@ -1,26 +1,27 @@
 package org.chenguoyu.leetcode.dynamic_programing;
 
+import java.util.List;
+
 /**
  * 记忆化搜索的解法
  */
-public class Solution70_1 {
-    private int[] memory;
+public class Solution120_1 {
+    private Integer[][] memory;
 
-    public int climbStairs(int n) {
-        memory = new int[n + 1];
-        return climbWays(n);
+    public int minimumTotal(List<List<Integer>> triangle) {
+        memory = new Integer[triangle.size() + 1][triangle.size() + 1];
+        return minTotal(triangle, 0, 0);
     }
 
-    private int climbWays(int n) {
-        if (n == 1) {
-            return 1;
+    public int minTotal(List<List<Integer>> triangle, int level, int n) {
+        if (level == triangle.size() - 1) {
+            return triangle.get(level).get(n);
         }
-        if (n == 2) {
-            return 2;
+        if (memory[level][n] == null) {
+            int left = minTotal(triangle, level + 1, n);
+            int right = minTotal(triangle, level + 1, n + 1);
+            memory[level][n] = triangle.get(level).get(n) + Math.min(left, right);
         }
-        if (memory[n] == 0) {
-            memory[n] = climbWays(n - 1) + climbWays(n - 2);
-        }
-        return memory[n];
+        return memory[level][n];
     }
 }

@@ -3,20 +3,28 @@ package org.chenguoyu.leetcode.dynamic_programing;
 /**
  * 动态规划的解法
  */
-public class Solution279_2 {
-    public int integerBreak(int n) {
-        int[] memory = new int[n + 1];
-        memory[1] = 1;
-        for (int i = 2; i <= n; i++) {
-            for (int j = 1; j < i; j++) {
-                memory[i] = max3(memory[i], j * (i - j), memory[i - j] * j);
+public class Solution279_1 {
+    Integer[] memory;
+
+    public int numSquares(int n) {
+        memory = new Integer[n + 1];
+        return squaresNum(n);
+    }
+
+    private int squaresNum(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        if (memory[n] == null) {
+            memory[n] = n;
+            for (int i = 1; i * i <= n; i++) {
+                if (n == i * i) {
+                    memory[n] = 1;
+                } else {
+                    memory[n] = Math.min(squaresNum(n - (i * i)) + 1, memory[n]);
+                }
             }
         }
         return memory[n];
-    }
-
-
-    private int max3(int x, int y, int z) {
-        return Math.max(x, Math.max(y, z));
     }
 }
