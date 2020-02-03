@@ -1,7 +1,5 @@
 package org.chenguoyu.leetcode.dynamic_programing;
 
-import java.util.List;
-
 /**
  * 记忆化搜索的解法
  */
@@ -33,7 +31,7 @@ public class Solution64_1 {
                 memory[row][col] = grid[row][col] + right;
             } else if (right == -1) {
                 memory[row][col] = grid[row][col] + down;
-            }else {
+            } else {
                 memory[row][col] = grid[row][col] + Math.min(right, down);
             }
         }

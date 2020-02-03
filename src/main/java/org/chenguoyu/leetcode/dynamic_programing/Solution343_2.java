@@ -1,7 +1,5 @@
 package org.chenguoyu.leetcode.dynamic_programing;
 
-import java.util.List;
-
 /**
  * 动态规划的解法
  */
