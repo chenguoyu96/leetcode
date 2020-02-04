@@ -1,4 +1,4 @@
-package org.chenguoyu.leetcode.dynamic_programing;
+package org.chenguoyu.leetcode.dynamic_programing.optimal_substructure;
 
 import java.util.List;
 

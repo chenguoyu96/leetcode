@@ -1,4 +1,4 @@
-package org.chenguoyu.leetcode.dynamic_programing;
+package org.chenguoyu.leetcode.dynamic_programing.optimal_substructure;
 
 /**
  * 记忆化搜索的解法
