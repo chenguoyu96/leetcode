@@ -1,4 +1,4 @@
-package org.chenguoyu.leetcode.common;
+package org.chenguoyu.leetcode.stack;
 
 import org.junit.Test;
 

@@ -2,12 +2,14 @@ package org.chenguoyu.leetcode.array;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  * 两数之和
  */
-public class Solution1 {
+public class Solution1_2 {
     public int[] twoSum(int[] nums, int target) {
         HashMap<Integer, LinkedList<Integer>> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
